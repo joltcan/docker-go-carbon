@@ -44,6 +44,7 @@ history:
 clean:
 	-$(DOCKER) rmi --force $(IMAGE_NAME)
 	-$(DOCKER) rmi --force $(BUILD_NAME)
+	-$(DOCKER) rm --force $(BUILD_NAME)
 	-$(DOCKER) rmi --force $(registry)/$(BUILD_NAME)
 	-$(DOCKER) rmi --force $(registry)/$(IMAGE_NAME)
 
