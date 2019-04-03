@@ -63,6 +63,7 @@ clean:
 push: 
 	$(DOCKER) tag $(CONTAINER) $(HUB_USER)/$(CONTAINER):$(TAG) && \
 	$(DOCKER) tag ${CONTAINER} ${HUB_USER}/${CONTAINER}:latest && \
+	$(DOCKER) push $(HUB_USER)/$(CONTAINER):$(TAG) && \
 	$(DOCKER) push ${HUB_USER}/${CONTAINER}:latest 
 
 commit:
