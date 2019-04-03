@@ -2,20 +2,18 @@ FROM scratch
 
 MAINTAINER Fredrik Lundhag <f@mekk.com>
 
-LABEL version="0.9.1"
+EXPOSE 2003 2003/udp 2004 7002 7003 7007 8000 8080
 
-EXPOSE 2003 2003/udp 2004 7002 7007 8008
-
-VOLUME ["/srv/carbon"]
+VOLUME ["/var/lib/graphite","/etc/go-carbon", "/var/log/go-carbon"]
 
 ADD passwd.minimal /etc/passwd
 
 ADD go-carbon /
 
-WORKDIR "/srv/carbon"
+WORKDIR "/var/lib/graphite"
 
-USER go-carbon
+USER carbon
 
 ENTRYPOINT ["/go-carbon"]
 
-CMD ["-config", "go-carbon.conf"]
+CMD ["-config", "/etc/go-carbon/go-carbon.conf", "-pidfile", "/go-carbon.pid"]

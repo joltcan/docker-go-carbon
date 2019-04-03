@@ -1,1 +1,1 @@
-go-carbon:x:206:65533:go-carbon:/srv/carbon:
+carbon:x:206:65533:carbon:/var/lib/graphite:
