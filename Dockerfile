@@ -1,6 +1,6 @@
 FROM scratch
 
-MAINTAINER Fredrik Lundhag <f@mekk.com>
+LABEL maintainer="Fredrik Lundhag <f@mekk.com>"
 
 EXPOSE 2003 2003/udp 2004 7002 7003 7007 8000 8080
 

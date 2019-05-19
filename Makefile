@@ -6,13 +6,13 @@ BUILD_NAME := "$(IMAGE_NAME)-build"
 DATA_DIR   := $(shell pwd)
 DOCKER     := docker
 HUB_USER   := $(USER)
-VERSION	   := 0.13.0
+VERSION	   := 0.14.0
 TAG		   := $(VERSION)
 
 build:
 	if $(DOCKER) ps -a |grep -q $(BUILD_NAME); \
 		then echo $(BUILD_NAME) exist, skipping; \
-		else $(DOCKER) run --name $(BUILD_NAME) golang sh -c "go get github.com/lomik/go-carbon ; cd /go/src/github.com/lomik/go-carbon/ ; git checkout 0.13.0 ; CGO_ENABLED=0 GOOS=linux go get -ldflags \"-s\" -a -installsuffix cgo github.com/lomik/go-carbon"; \
+		else $(DOCKER) run --name $(BUILD_NAME) golang sh -c "go get github.com/lomik/go-carbon ; cd /go/src/github.com/lomik/go-carbon/ ; git checkout $(VERSION) ; CGO_ENABLED=0 GOOS=linux go get -ldflags \"-s\" -a -installsuffix cgo github.com/lomik/go-carbon"; \
     fi
 
 	$(DOCKER) cp $(BUILD_NAME):/go/bin/go-carbon .
@@ -24,7 +24,7 @@ build:
 		--rm --tag=$(IMAGE_NAME) .
 	-rm go-carbon >/dev/null
 
-run: 
+run:
 	$(DOCKER) \
 		run \
 		--detach \
