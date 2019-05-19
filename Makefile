@@ -57,8 +57,7 @@ clean:
 	-$(DOCKER) rmi --force $(IMAGE_NAME)
 	-$(DOCKER) rmi --force $(BUILD_NAME)
 	-$(DOCKER) rm --force $(BUILD_NAME)
-	-$(DOCKER) rmi --force $(registry)/$(BUILD_NAME)
-	-$(DOCKER) rmi --force $(registry)/$(IMAGE_NAME)
+	-$(DOCKER) rmi --force $(HUB_USER)/$(IMAGE_NAME)
 
 push: 
 	$(DOCKER) tag $(CONTAINER) $(HUB_USER)/$(CONTAINER):$(TAG) && \
