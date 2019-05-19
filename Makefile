@@ -19,10 +19,10 @@ build:
 	$(DOCKER) cp $(BUILD_NAME):/go/src/github.com/lomik/go-carbon/deploy/go-carbon.conf .
 	$(DOCKER) cp $(BUILD_NAME):/go/src/github.com/lomik/go-carbon/deploy/storage-aggregation.conf .
 	$(DOCKER) cp $(BUILD_NAME):/go/src/github.com/lomik/go-carbon/deploy/storage-schemas.conf .
-	$(DOCKER) \
-		build \
-		--rm --tag=$(IMAGE_NAME) .
-	-rm go-carbon >/dev/null
+	$(DOCKER)	build --rm \
+		--tag=$(IMAGE_NAME) \
+		--tag=$(IMAGE_NAME):$(VERSION) \
+		.
 
 run:
 	$(DOCKER) \
@@ -59,7 +59,7 @@ clean:
 	-$(DOCKER) rm --force $(BUILD_NAME)
 	-$(DOCKER) rmi --force $(HUB_USER)/$(IMAGE_NAME)
 
-push: 
+push:
 	$(DOCKER) tag $(CONTAINER) $(HUB_USER)/$(CONTAINER):$(TAG) && \
 	$(DOCKER) tag ${CONTAINER} ${HUB_USER}/${CONTAINER}:latest && \
 	$(DOCKER) push $(HUB_USER)/$(CONTAINER):$(TAG) && \
